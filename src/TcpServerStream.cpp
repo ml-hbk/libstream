@@ -35,6 +35,9 @@ namespace daq::stream {
 
     boost::system::error_code TcpServerStream::init()
     {
-        return boost::system::error_code();
+        // disable nagle algorithm
+        boost::system::error_code ec;
+        m_socket.set_option(boost::asio::ip::tcp::no_delay(true), ec);
+        return ec;
     }
 }

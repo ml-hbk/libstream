@@ -62,6 +62,12 @@ namespace daq::stream {
 
         // Make the connection on the IP address we got from the lookup
         m_socket.connect(results.begin()->endpoint(), ec);
+        if (ec) {
+            return ec;
+        }
+
+        // disable nagle algorithm
+        m_socket.set_option(boost::asio::ip::tcp::no_delay(true), ec);
         return ec;
     }
 
