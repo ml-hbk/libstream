@@ -146,6 +146,10 @@ void WebsocketClientStream::setOptions()
     // the websocket stream has its own timeout system.
     boost::beast::get_lowest_layer(m_stream).expires_never();
 
+    // disable nagle algorithm
+    boost::system::error_code ec;
+    boost::beast::get_lowest_layer(m_stream).socket().set_option(boost::asio::ip::tcp::no_delay(true), ec);
+
     m_stream.binary(true);
 
     // Set suggested timeout settings for the websocket

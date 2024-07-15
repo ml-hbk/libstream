@@ -76,6 +76,10 @@ namespace daq::stream {
             return;
         }
 
+        // disable nagle algorithm
+        boost::system::error_code localEc;
+        tcpSocket.set_option(boost::asio::ip::tcp::no_delay(true), localEc);
+
         {
             std::shared_ptr<boost::beast::websocket::stream<boost::beast::tcp_stream>> websocket = std::make_shared<boost::beast::websocket::stream<boost::beast::tcp_stream>>(std::move(tcpSocket));
             websocket->write_buffer_bytes(65536);
