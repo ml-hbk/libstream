@@ -6,6 +6,7 @@ set(INTERFACE_HEADERS
     TcpClientStream.hpp
     TcpServerStream.hpp
     TcpServer.hpp
+    TcpStream.hpp
     WebsocketClientStream.hpp
     WebsocketServerStream.hpp
     WebsocketServer.hpp
